@@ -1,0 +1,417 @@
+{
+    "openapi": "3.0.0",
+    "info": {
+      "title": "api-simovsat",
+      "description": "api-simovsat",
+      "version": "1.0.2023"
+    },
+    "paths": {
+      "/": {
+        "get": {
+          "summary": "HOW TO USE THIS API",
+          "responses": {
+            "200": {
+              "description": "request OK",
+              "content": {
+                "application/json": {
+                  "schema": {
+                    "type": "object",
+                    "properties": {
+                      "message": {
+                        "type": "string"
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+
+      "/movida_generate_link/placa": {
+        "get": {
+          "summary": "LINK MAPS VEHICLE :: MOVIDA",
+          "responses": {
+            "200": {
+              "description": "request OK",
+              "content": {
+                "application/json": {
+                  "schema": {
+                    "type": "object",
+                    "properties": {
+                      "message": {
+                        "type": "string"
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+
+      "/movida_cerca": {
+        "get": {
+          "summary": "CERCA MAPS::: MOVIDA",
+          "responses": {
+            "200": {
+              "description": "request OK",
+              "content": {
+                "application/json": {
+                  "schema": {
+                    "type": "object",
+                    "properties": {
+                      "message": {
+                        "type": "string"
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+
+      "/movida_result/placa": {
+        "get": {
+          "summary": "VEHILE DATA:::: MOVIDA",
+          "responses": {
+            "200": {
+              "description": "request OK",
+              "content": {
+                "application/json": {
+                  "schema": {
+                    "type": "object",
+                    "properties": {
+                      "message": {
+                        "type": "string"
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+
+
+      
+
+      "/usuarios": {
+        "post": {
+          "summary": "GET USERS HINOVA",
+          "responses": {
+            "200": {
+              "description": "request OK",
+              "content": {
+                "application/json": {
+                  "schema": {
+                    "type": "array",
+                    "items": {
+                      "type": "object",
+                      "properties": {
+                        "usuario": {
+                          "type":   "string"
+                        },
+                        "senha": {
+                            "type": "string"
+                        },
+                        "codigo_situacao": {
+                            "type": "string"
+                        },
+                        "inicio_paginacao": {
+                            "type": "string"
+                        },
+                        "quantidade_por_pagina": {
+                            "type": "string"
+                        },
+                        "data_inicio":{
+                          "type":"string"
+                        },
+                        "data_fim":{
+                          "type":"string"
+                        },
+                        "total": {
+                          "type": "integer"
+                      }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+
+
+    
+
+      "/veiculos": {
+        "post": {
+          "summary": "GET USERS HINOVA",
+          "responses": {
+            "200": {
+              "description": "request OK",
+              "content": {
+                "application/json": {
+                  "schema": {
+                    "type": "array",
+                    "items": {
+                      "type": "object",
+                      "properties": {
+                        "usuario": {
+                          "type":   "string"
+                        },
+                        "senha": {
+                            "type": "string"
+                        },
+                        "codigo_situacao": {
+                            "type": "string"
+                        },
+                        "inicio_paginacao": {
+                            "type": "string"
+                        },
+                        "quantidade_por_pagina": {
+                            "type": "string"
+                        },
+                        "data_inicio":{
+                          "type":"string"
+                        },
+                        "data_fim":{
+                          "type":"string"
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+
+      "/cooperativa": {
+        "post": {
+          "summary": "GET ALL SITUATIONS HINOVA",
+          "responses": {
+            "200": {
+              "description": "request OK",
+              "content": {
+                "application/json": {
+                  "schema": {
+                    "type": "array",
+                    "items": {
+                      "type": "object",
+                      "properties": {
+                        "usuario": {
+                          "type": "string"
+                        },
+                        "senha": {
+                            "type": "string"
+                         }
+                       }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+
+  "/produto": {
+    "post": {
+      "summary": "GET ALL PRODCTS HINOVA",
+      "responses": {
+        "200": {
+          "description": "request OK",
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "array",
+                "items": {
+                  "type": "object",
+                  "properties": {
+                     "usuario": {
+                      "type": "string"
+                     },
+                     "senha": {
+                        "type": "string"
+                     },
+                     "codigo_regional": {
+                      "type": "string"
+                     },
+                  
+                     "codigo_cooperativa": {
+                      "type": "string"
+                     },
+                    "codigo_tipo_veiculo": {
+                      "type": "string"
+                     },
+                    "valor_fipe": {
+                     "type": "string"
+                     },
+                    "cilindrada": {
+                      "type": "string"
+                     }
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+
+
+    "/bloqueio": {
+      "post": {
+        "summary": "GET ALL SITUATIONS HINOVA",
+        "responses": {
+          "200": {
+            "description": "request OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "type": "object",
+                    "properties": {
+                      "usuario": {
+                        "type": "string"
+                       },
+                        "senha": {
+                          "type": "string"
+                       },
+                        "codigo_situacao": {
+                          "type": "string"
+                       },
+                       "inicio_paginacao": {
+                          "type": "string"
+                       },
+                       "quantidade_por_pagina": {
+                          "type": "string"
+                       }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+
+
+      "/voluntarios": {
+        "post": {
+          "summary": "GET ALL SITUATIONS HINOVA",
+          "responses": {
+            "200": {
+              "description": "request OK",
+              "content": {
+                "application/json": {
+                  "schema": {
+                    "type": "array",
+                    "items": {
+                      "type": "object",
+                      "properties": {
+                        "usuario": {
+                          "type": "string"
+                        },
+                        "senha": {
+                            "type": "string"
+                         }
+                       }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+      
+
+
+
+
+        "/veiculos_filter": {
+          "post": {
+            "summary": "GET ALL PRODCTS HINOVA",
+            "responses": {
+              "200": {
+                "description": "request OK",
+                "content": {
+                  "application/json": {
+                    "schema": {
+                      "type": "array",
+                      "items": {
+                        "type": "object",
+                        "properties": {
+                           "usuario": {
+                            "type": "string"
+                           },
+                           "senha": {
+                              "type": "string"
+                           },
+                           "codigo_situacao": {
+                            "type": "string"
+                           },
+                        
+                           "inicio_paginacao": {
+                            "type": "string"
+                           },
+                           "quantidade_por_pagina": {
+                            "type": "string"
+                           },
+                           "data_inicio": {
+                           "type": "string"
+                           },
+                           "data_fim": {
+                            "type": "string"
+                           },
+                           "codigo_regional": {
+                            "type": "string"
+                           },
+    
+                           "codigo_cooperativa": {
+                            "type": "string"
+                           },
+                           "codigo_tipo_veiculo": {
+                            "type": "string"
+                           },
+    
+                           "valor_fipe": {
+                            "type": "string"
+                           },
+    
+                           "cilindrada": {
+                            "type": "string"
+                           }
+                          }
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          }
+    
+    
+}}
+
+  
+
+
+
+
+    
+

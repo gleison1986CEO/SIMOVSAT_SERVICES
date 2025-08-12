@@ -1,0 +1,1 @@
+Programador & Desenvolvedor,Nós atuamos em projetos nas seguintes linguagens:Python (Para Inteligência Artificial),Python (Bots),Java,C#,Assembly, C++, Go, Rust, Dart, Swift, Js, Unity(C#) Nós Construimos e administramos servidores como:  FREEBSD, LINUX, WINDOWS. Desenvolvimento e Treinamento de I.A.

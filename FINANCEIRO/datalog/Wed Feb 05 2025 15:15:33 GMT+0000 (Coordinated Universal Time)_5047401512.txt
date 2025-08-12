@@ -1,0 +1,16 @@
+Olá! ROBERTO DIAS DA SILVA
+
+Informamos os dados do seu *boleto*para pagamento:
+
+ -*linha digitável:* 34191.09362 68819.450930 75008.900005 1 99880000023651 
+ -*link de pagamento:* https://short.hinova.com.br/v2/rlm70nRd.pdf 
+ -*valor:* 236.51 
+ -*cpf:* 673.958.997-68
+
+Lembre-se: boletos em aberto após o vencimento deixarão o veículo descoberto.
+
+*Caso ja tenha pago,desconsidere essa mensagem*
+
+Estamos à disposição para ajudar!
+
+Acesse nosso site: [somatto.org.br](https://somatto.org.br/)
