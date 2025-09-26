@@ -1,1 +1,0 @@
-Erro conexao: Active.Connection.__contruct.conexao.controle_acesso_api.controle_acesso_api

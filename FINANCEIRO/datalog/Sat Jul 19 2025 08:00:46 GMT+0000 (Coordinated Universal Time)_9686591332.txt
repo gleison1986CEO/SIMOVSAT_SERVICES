@@ -1,2 +1,0 @@
-Error: Invalid login: 535-5.7.8 Username and Password not accepted. For more information, go to
-535 5.7.8  https://support.google.com/mail/?p=BadCredentials d75a77b69052e-4abb4b1e6f1sm16664221cf.49 - gsmtp

@@ -11,22 +11,20 @@ var express                = require('express');
 var request                = require('request');
 var bodyParser             = require('body-parser');
 var api                    = express();
-
+const fs                   = require('node:fs');
 
 api.use(bodyParser.json());
+
 
 ///CLIENTES CONNECTION
 ///CLIENTES CONNECTION     
   
-var client          = CONNECTION.CLIENTE();
+var client            = CONNECTION.CLIENTE();
 CONNECTION.QR(client); 
 CONNECTION.READY(client);
 
 ///CLIENTES CONNECTION
 ///CLIENTES CONNECTION  
-
-
-/// DATAS
 
 
 const DATETODAY = new Date().toLocaleDateString('en-GB');
@@ -57,7 +55,9 @@ const day31 = "31/" + month + "/" + year
 /// DATAS
 client.on('message', async (msg) => {
         
-
+        console.log("##############");
+        console.log("##############");
+        console.log("##############");
         LOGS.LOGS(msg.body);
         if (
             msg.body == 'boleto'  || 
@@ -142,11 +142,14 @@ client.on('message', async (msg) => {
         
         
         ) {
-
+            console.log("####");
+            console.log(msg.body);
+            console.log("####");
             await msg.reply("Olá! Tudo bem? Nós somos a Somatto Proteção Veicular\n\nPara verificarmos o financeiro\n\n*Porfavor digite seu CPF*\n*OBS:sem espaços ou pontos* \n")
         
         }
-
+         
+ 
 
         else if(isNaN(msg.body) == false && msg.body.length == 11){ 
 
@@ -512,12 +515,22 @@ async function Users(cpf,KEY){
             }
 }}
 
+// SCANNER QRCODE
 
+api.get('/qrcode', (req, res) => {
 
+    fs.readFile('datalog/qr.json', 'utf8', (err, data) => {
+    if (err) {
+        console.error('NOT HAVE ONE', err);
+        return;
+    }
+        const jsonObject = JSON.parse(data);
+        res.json(jsonObject);
+    });
+    
+});
 
-
-// ROTATIVIDADE DO MICROSERVIÇO PYTHON PORTANDO NESSE ENPOINT A CADA 24 HORAS
-// ROTATIVIDADE DO MICROSERVIÇO PYTHON PORTANDO NESSE ENPOINT A CADA 24 HORAS
+// SCANNER QRCODE
 
 
 api.post('/boletos', async (req, res)  => {

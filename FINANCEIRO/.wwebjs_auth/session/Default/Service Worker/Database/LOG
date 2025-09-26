@@ -1,3 +1,2 @@
-2025/08/11-17:11:37.659 2b6cd Reusing MANIFEST /home/gleison/Documentos/NODE/ATISE/FINANCEIRO/.wwebjs_auth/session/Default/Service Worker/Database/MANIFEST-000001
-2025/08/11-17:11:37.659 2b6cd Recovering log #3
-2025/08/11-17:11:37.659 2b6cd Reusing old log /home/gleison/Documentos/NODE/ATISE/FINANCEIRO/.wwebjs_auth/session/Default/Service Worker/Database/000003.log 
+2025/09/26-20:41:19.987 18ac5 Creating DB /home/gleison/Documentos/NODE/ATISE/FINANCEIRO/.wwebjs_auth/session/Default/Service Worker/Database since it was missing.
+2025/09/26-20:41:19.998 18ac5 Reusing MANIFEST /home/gleison/Documentos/NODE/ATISE/FINANCEIRO/.wwebjs_auth/session/Default/Service Worker/Database/MANIFEST-000001

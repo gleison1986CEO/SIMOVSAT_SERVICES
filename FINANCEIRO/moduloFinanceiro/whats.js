@@ -19,31 +19,36 @@ module.exports.CLIENTE = function (){
 }
 
 
+module.exports.QR = async function(client){
+        
 
 
+        client.on('qr', (qr) => {
+            if(qr){
 
-
-module.exports.QR = function (client){
-
-    client.on('qr', (qr) => {
-        if(qr){
-
-            QRCODE.toString( qr , 
-                {type:'terminal', width: 50,height: 50, scale: 2}, 
-                function (err, url) {
-                console.table(url)
-                console.log('QR RECEIVED', qr);
-                LOGS.LOGS(qr);
-               // EMAIL.EMAIL(qr);
-            })
-    
-        }else{
-            const msg = "SEU WHATSAPP JÁ ESTÁ ESCANEADO, E ESTÁ FUNCIONANDO CORRETAMENTE! \nFIQUE ATENTO AS ATUALIZAÇÕES DO WHATSAPP OBRIGADO!😀"
-            LOGS.LOGS("TESTE! CONECTADO WHATSAPP!");
-            EMAIL.EMAIL(msg);
-        }
+                QRCODE.toString( qr , 
+                    {type:'terminal', width: 50,height: 50, scale: 2}, 
+                    function (err, url) {
+                    LOGS.LOGS(qr);
+                    console.log("#########");
+                    console.log(qr);
+                    console.log("#########");
+                })
+        
+            }else{
+                const msg = "SEU WHATSAPP JÁ ESTÁ ESCANEADO, E ESTÁ FUNCIONANDO CORRETAMENTE! \nFIQUE ATENTO AS ATUALIZAÇÕES DO WHATSAPP OBRIGADO!😀"
+                LOGS.LOGS(msg);
+                console.log("#########");
+                console.log(qr);
+                console.log("#########");                
+                //EMAIL.EMAIL(msg);
+            }
+     
+    })
        
-    });
+ 
+
+    
 
 }
 
@@ -55,6 +60,7 @@ module.exports.READY = function (client){
         const mess = "SEU WHATSAPP JÁ ESTÁ ESCANEADO, E ESTÁ FUNCIONANDO CORRETAMENTE! \nFIQUE ATENTO AS ATUALIZAÇÕES DO WHATSAPP OBRIGADO!😀"
         LOGS.LOGS("TESTE! CONECTADO WHATSAPP!");
         EMAIL.EMAIL(mess);
+        return mess;
     });
 }
 

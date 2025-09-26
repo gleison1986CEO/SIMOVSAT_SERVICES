@@ -1,3 +1,2 @@
-2025/08/11-17:11:38.203 2b6cd Reusing MANIFEST /home/gleison/Documentos/NODE/ATISE/FINANCEIRO/.wwebjs_auth/session/Default/Session Storage/MANIFEST-000001
-2025/08/11-17:11:38.203 2b6cd Recovering log #3
-2025/08/11-17:11:38.203 2b6cd Reusing old log /home/gleison/Documentos/NODE/ATISE/FINANCEIRO/.wwebjs_auth/session/Default/Session Storage/000003.log 
+2025/09/26-20:41:19.176 18a64 Creating DB /home/gleison/Documentos/NODE/ATISE/FINANCEIRO/.wwebjs_auth/session/Default/Session Storage since it was missing.
+2025/09/26-20:41:19.187 18a64 Reusing MANIFEST /home/gleison/Documentos/NODE/ATISE/FINANCEIRO/.wwebjs_auth/session/Default/Session Storage/MANIFEST-000001

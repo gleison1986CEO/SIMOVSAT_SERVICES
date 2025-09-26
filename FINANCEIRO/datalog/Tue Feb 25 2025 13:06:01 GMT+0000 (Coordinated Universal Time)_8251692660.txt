@@ -1,1 +1,0 @@
-{"mensagem":"Acesso n\u00e3o autorizado. Verique seu token de acesso","error":["Login ou senha inv\u00e1lido."]}
