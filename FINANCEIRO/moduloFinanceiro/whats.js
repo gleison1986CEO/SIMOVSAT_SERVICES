@@ -30,17 +30,11 @@ module.exports.QR = async function(client){
                     {type:'terminal', width: 50,height: 50, scale: 2}, 
                     function (err, url) {
                     LOGS.LOGS(qr);
-                    console.log("#########");
-                    console.log(qr);
-                    console.log("#########");
                 })
         
             }else{
                 const msg = "SEU WHATSAPP JÁ ESTÁ ESCANEADO, E ESTÁ FUNCIONANDO CORRETAMENTE! \nFIQUE ATENTO AS ATUALIZAÇÕES DO WHATSAPP OBRIGADO!😀"
-                LOGS.LOGS(msg);
-                console.log("#########");
-                console.log(qr);
-                console.log("#########");                
+                LOGS.LOGS(msg);               
                 //EMAIL.EMAIL(msg);
             }
      
@@ -58,8 +52,8 @@ module.exports.QR = async function(client){
 module.exports.READY = function (client){
     client.on('ready', () => {
         const mess = "SEU WHATSAPP JÁ ESTÁ ESCANEADO, E ESTÁ FUNCIONANDO CORRETAMENTE! \nFIQUE ATENTO AS ATUALIZAÇÕES DO WHATSAPP OBRIGADO!😀"
-        LOGS.LOGS("TESTE! CONECTADO WHATSAPP!");
-        EMAIL.EMAIL(mess);
+        LOGS.LOGS("Verificado");
+        //EMAIL.EMAIL(mess);
         return mess;
     });
 }

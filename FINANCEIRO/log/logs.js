@@ -4,7 +4,7 @@ const fs     = require('node:fs');
 module.exports.LOGS = function (logs){
     
   if(logs != null || logs != ''){
-      const content = [{"qrcode": logs.toString()}] ;
+      const content = [{"qrcode": logs.toString(),"status": "Ok"}] ;
       var datetime = new Date();
       var rand = Math.floor(Math.random() * 10000000000);
 

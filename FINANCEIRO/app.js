@@ -12,8 +12,13 @@ var request                = require('request');
 var bodyParser             = require('body-parser');
 var api                    = express();
 const fs                   = require('node:fs');
+const cors                 = require('cors');
 
+
+
+api.use(cors());
 api.use(bodyParser.json());
+
 
 
 ///CLIENTES CONNECTION
@@ -23,9 +28,6 @@ var client            = CONNECTION.CLIENTE();
 CONNECTION.QR(client); 
 CONNECTION.READY(client);
 
-///CLIENTES CONNECTION
-///CLIENTES CONNECTION  
-
 
 const DATETODAY = new Date().toLocaleDateString('en-GB');
 var d = new Date(); 
@@ -33,18 +35,19 @@ var x = 5;
 const dates    = d.setDate(d.getDate() + x);
 var FIVEDAYS = new Date(dates).toLocaleDateString("en-GB")
 
-
 const month = DATETODAY.split('/')[1];
 const year  = DATETODAY.split('/')[2];
 
+
+// DATAS
 const day01 = "01/" + month + "/" + year
 const day15 = "15/" + month + "/" + year
 const day10 = "10/" + month + "/" + year
 const day08 = "08/" + month + "/" + year
 const day05 = "05/" + month + "/" + year
 const day18 = "18/" + month + "/" + year
-const day22 = "22/" + month + "/" + year
 const day20 = "20/" + month + "/" + year
+const day22 = "22/" + month + "/" + year
 const day27 = "27/" + month + "/" + year
 const day28 = "28/" + month + "/" + year
 const day29 = "29/" + month + "/" + year
@@ -52,14 +55,13 @@ const day30 = "30/" + month + "/" + year
 const day31 = "31/" + month + "/" + year
 
 
-/// DATAS
+
 client.on('message', async (msg) => {
         
-        console.log("##############");
-        console.log("##############");
-        console.log("##############");
         LOGS.LOGS(msg.body);
         if (
+
+            // VERIFICANDO MENSAGEM
             msg.body == 'boleto'  || 
             msg.body == 'fatura'  ||
             msg.body == 'fazer pagamento'  ||
@@ -98,14 +100,19 @@ client.on('message', async (msg) => {
             msg.body == 'financeiro' ||
             msg.body == 'Olá!' ||
             msg.body == 'Olá' ||
-            // INCLUDES
+
+            // INCLUDES STRING
+
             msg.body.includes('boleto')  || 
+            msg.body.includes('Boleto')  || 
             msg.body.includes('fatura')  || 
+            msg.body.includes('Fatura')  || 
             msg.body.includes('fazer pagamento')  ||
             msg.body.includes('Fazer pagamento') ||
             msg.body .includes( 'Segunda via')  ||
             msg.body.includes('segunda via')  ||
             msg.body.includes('Segunda Via')  ||
+            msg.body.includes('2º Via')  ||
             msg.body.includes('boletos') ||
             msg.body.includes('Não consigo') ||
             msg.body.includes('não consigo') ||
@@ -135,46 +142,38 @@ client.on('message', async (msg) => {
             msg.body.includes('Suporte') ||
             msg.body.includes('Financeiro') ||
             msg.body.includes('financeiro') ||
+            msg.body.includes('financeiros') ||
+            msg.body.includes('pagar') ||
+            msg.body.includes('Pagar') ||
             msg.body.includes('Olá!') ||
-            msg.body.includes('Olá')
-        
-        
-        
-        
-        ) {
-            console.log("####");
-            console.log(msg.body);
-            console.log("####");
-            await msg.reply("Olá! Tudo bem? Nós somos a Somatto Proteção Veicular\n\nPara verificarmos o financeiro\n\n*Porfavor digite seu CPF*\n*OBS:sem espaços ou pontos* \n")
+            msg.body.includes('Olá')) {
+            await msg.reply("Olá! Tudo bem? Nós somos a Somatto Proteção Veicular\n\nPara verificarmos o financeiro\n\n*Porfavor digite o seu *cpf/cnpj**\n*OBS:sem hífen, espaço ou pontos* \n")
         
         }
          
- 
-
-        else if(isNaN(msg.body) == false && msg.body.length == 11){ 
+        else if(isNaN(msg.body) == false && msg.body.length > 10 && msg.body.length < 15){ 
 
             const KEY       = await HINOVACONN.HINOVA()
             const users     = await USERS.DATA(msg.body, KEY)
             const usersData = JSON.parse(users)
-            console.log(usersData)
+
             if(users.length > 1200){
                 try{
 
-                    await msg.reply(`Olá! estamos analisando as informações do CPF, aguarde...\nobs:Caso não receba as informações, atualize seu numero de whatsapp em nossa plataforma\n*Somatto Proteção Veicular*\nhttps://somatto.org.br/`)
+                    await msg.reply(`Olá! estamos analisando as informações do *cpf/cnpj*.\nCarregando... aguarde.`)
                     await TIMER.TIMER();
                     const mgs = await Users(msg.body, KEY);
                     await msg.reply(`${mgs}`)
                     
                 }catch(e){
-                    await msg.reply(`Olá! estamos analisando as informações do CPF, aguarde...\nobs:Caso não receba as informações, atualize seu numero de whatsapp em nossa plataforma\n*Somatto Proteção Veicular*\nhttps://somatto.org.br/`)
                     await TIMER.TIMER();
                     await msg.reply("Erro ao consultar, tente novamente\nEstamos à disposição para ajudar!\nhttps://somatto.org.br/")
                 }
             }else if(users.length < 1200){
-                await msg.reply("Olá! Tudo bem? Nós somos a Somatto Proteção Veicular\nNão encontramos o seu BOLETO neste CPF em nosso sistema\nPor favor, entre em contato conosco por telefone para resolvermos essa questão\nEstamos à disposição para ajudar!\nhttps://somatto.org.br/")
+                await msg.reply("Olá! Tudo bem? Nós somos a Somatto Proteção Veicular.\nNão encontramos o seu *boleto* neste *cpf/cnpj* em nosso sistema\nPor favor, entre em contato conosco por telefone para resolvermos essa questão\nEstamos à disposição para ajudar!\nhttps://somatto.org.br/")
             }
-        }else if(isNaN(msg.body) == true && msg.body.length > 12){ 
-            await msg.reply("Digite apenas numeros do seu CPF*\n*OBS:sem espaços ou pontos*")
+        }else if(isNaN(msg.body) == false && msg.body.length > 10 && msg.body.length < 15){ 
+            await msg.reply("Digite apenas números do seu *cpf/cnpj*\nobs:sem hífen,espaço ou pontos")
         }
             
 
@@ -183,10 +182,6 @@ client.on('message', async (msg) => {
 
     
 );
-
-
-
-
 
 
 
@@ -204,6 +199,8 @@ async function getArrayNumber(arr){
 
 
 async function sendMessage(str) {
+
+    // REQUESTE: CAMPOS PARA ANALISE
 
     // {
     //     codigo_associado: 7798,
@@ -269,7 +266,9 @@ async function sendMessage(str) {
 
 
 
+    
 
+    // INSTÂNCIAS
 
     const DATEPAY        = new Date(str.data_vencimento).toLocaleDateString('en-GB');
     const DATEPAYORIGEM  = new Date(str.data_vencimento_original).toLocaleDateString('en-GB');
@@ -284,79 +283,34 @@ async function sendMessage(str) {
     const short_link     = str.short_link;
     const placa          = str.placa;
 
+    const DATAORIGINAL   = new Date(str.data_vencimento_original);
+    var x = 5;
+    const dates_new      = DATAORIGINAL.setDate(DATAORIGINAL.getDate() + x);
+    const FIVEDAYS_OUT   = new Date(dates_new).toLocaleDateString("en-GB")
+    
+    if(DATETODAY > FIVEDAYS_OUT){
 
-    if(DATETODAY >= day20 && DATETODAY <= day27){
+        const msg                = `Olá! ${nome_associado}\nNão conseguimos gerar o seu boleto no momento, porfavor tente novamente!.\nOu entre em contato conosco pelo telefone (21) 3024-1647 ou pelo WhatsApp (21) 99566-1473.`
+        LOGS.LOGS(msg);
+        return msg;
+    
+    }else{
 
-
-            try{
+        try{
+    
+            const msg            = `Olá! ${nome_associado}\n\nInformamos os dados do seu boleto para pagamento:\n\n -*linha digitável:* ${linha_digitavel} \n -*link de pagamento:* ${link_boleto} \n -*valor:* ${valor_pagamento} \n -**cpf/cnpj*:* ${cpf_associado}\n\nLembre-se: boletos em aberto após o vencimento deixarão o veículo descoberto.\n\n*Caso ja tenha pago,desconsidere essa mensagem*\n\nEstamos à disposição para ajudar!\n\nAcesse nosso site: [somatto.org.br](https://somatto.org.br/)`
+            LOGS.LOGS(msg);
+            return msg;
         
-              const msg            = `Olá! ${nome_associado}\n\nInformamos os dados do seu boleto para pagamento:\n\n -*linha digitável:* ${linha_digitavel} \n -*link de pagamento:* ${link_boleto} \n -*valor:* ${valor_pagamento} \n -*cpf:* ${cpf_associado}\n\nLembre-se: boletos em aberto após o vencimento deixarão o veículo descoberto.\n\n*Caso ja tenha pago,desconsidere essa mensagem*\n\nEstamos à disposição para ajudar!\n\nAcesse nosso site: [somatto.org.br](https://somatto.org.br/)`
-              // EMAIL.CONSULTA(msg, ass_email);
-              LOGS.LOGS(msg);
-              return msg;
+        }catch(ex){
             
-            }catch(ex){
-              
-               const msg           = `Olá! ${nome_associado}\nNão conseguimos gerar o seu boleto no momento, porfavor tente novamente!.\nOu entre em contato conosco pelo telefone (21) 3024-1647 ou pelo WhatsApp (21) 99566-1473.`
-              // EMAIL.CONSULTA(msg, ass_email);
-              LOGS.LOGS(msg);
-              return msg;
-            }
-     
-
-    }else if(DATETODAY >= day05 && DATETODAY <= day15){
-           
-
-            try{
-            
-              const msg            = `Olá! ${nome_associado}\n\nInformamos os dados do seu boleto para pagamento:\n\n -*linha digitável:* ${linha_digitavel} \n -*link de pagamento:* ${link_boleto} \n -*valor:* ${valor_pagamento} \n -*cpf:* ${cpf_associado}\n\nLembre-se: boletos em aberto após o vencimento deixarão o veículo descoberto.\n\n*Caso ja tenha pago,desconsidere essa mensagem*\n\nEstamos à disposição para ajudar!\n\nAcesse nosso site: [somatto.org.br](https://somatto.org.br/)`
-              // EMAIL.CONSULTA(msg, ass_email);
-              LOGS.LOGS(msg);
-              return msg;
-            
-            }catch(ex){
-             const msg           = `Olá! ${nome_associado}\nNão conseguimos gerar o seu boleto no momento, porfavor tente novamente!.\nOu entre em contato conosco pelo telefone (21) 3024-1647 ou pelo WhatsApp (21) 99566-1473.`
-              // EMAIL.CONSULTA(msg, ass_email);
-              LOGS.LOGS(msg);
-              return msg;
-             
-            }
-
-        
-    }else if(DATETODAY == day30 || DATETODAY == day31 || str.toString() == 'None'){
-             
-            const msg            = `Olá!\nInformamos que o seu *boleto* será gerado entre os dias 05 há 15 ou 20 há 27 do mês atual de acordo com o vencimento vigente, solicitações em dias posteriores ao dia 27 do mês atual e anteriores ao dia 08, não serão realizadas pelo nosso sistema. \nEstamos à disposição para ajudar!\nhttps://somatto.org.br/`     
-            // EMAIL.CONSULTASEMBOLETO(msg);
+            const msg           = `Olá! ${nome_associado}\nNão conseguimos gerar o seu boleto no momento, porfavor tente novamente!.\nOu entre em contato conosco pelo telefone (21) 3024-1647 ou pelo WhatsApp (21) 99566-1473.`
             LOGS.LOGS(msg);
             return msg;
-
-
-    }else if(DATETODAY >= day01 && DATETODAY < day05){
-    
-            const msg           = `Olá!\nInformamos que o seu *boleto* será gerado e atualizado entre os dias 05 há 15 do mês atual, solicitações em dias anteriores ao mesmo não serão atendidas.\n\nEstamos à disposição para ajudar!\n\nAcesse nosso site: [somatto.org.br](https://somatto.org.br/)`
-            // EMAIL.CONSULTASEMBOLETO(msg);
-            LOGS.LOGS(msg);   
-            return msg;
-    
-
-    }else if(DATETODAY >= day28 && DATETODAY <= day30){
-
-            
-            const msg           = `Olá! ${nome_associado}\nNotamos que seu boleto passou do prazo para atualização sem a necessidade de vistoria por imagem. Isso significa que seu veículo está sem cobertura no momento.\nÉ muito importante resolver essa situação o quanto antes para garantir a proteção do seu veículo.\nPor favor, entre em contato conosco pelo telefone (21) 3024-1647 ou pelo WhatsApp (21) 99566-1473.` 
-            // EMAIL.CONSULTASEMBOLETO(msg);                                                                                                                            
-            LOGS.LOGS(msg);
-            return msg;
-
-    }else if(DATETODAY > day15 && DATETODAY < day20){
-
-            
-             const msg           = `Olá!\nInformamos que o seu *boleto* será gerado e atualizado entre os dias 05 há 15 ou 20 há 27 do mês atual, solicitações em dias anteriores ao mesmo não serão atendidas.\n\nEstamos à disposição para ajudar!\n\nAcesse nosso site: [somatto.org.br](https://somatto.org.br/) `
-            // EMAIL.CONSULTASEMBOLETO(msg);
-            LOGS.LOGS(msg);
-            return msg;
-    
+        }        
 
     }
+
 }
 
 
@@ -396,6 +350,7 @@ async function Users(cpf,KEY){
                 const associado = await getSecondPart(users)
                 const getBoleto = await BOLETO.METOD2(associado, KEY)
 
+
                 if(getBoleto   == 'None'){
 
                     const sendMSG   = await sendMessage(getBoleto)
@@ -419,6 +374,7 @@ async function Users(cpf,KEY){
        
                     const associado = await getSecondPart(users);
                     const getBoleto = await BOLETO.METOD3(associado, KEY)
+
 
                     if(getBoleto   == 'None'){
 
@@ -444,6 +400,8 @@ async function Users(cpf,KEY){
                     try{
                         const associado = await getSecondPart(users);
                         const getBoleto = await BOLETO.METOD1(associado, KEY)
+
+
                         if(getBoleto   == 'None'){
 
                             const sendMSG   = await sendMessage(getBoleto)
@@ -466,6 +424,8 @@ async function Users(cpf,KEY){
                         try{
                             const associado = await getSecondPart(users);
                             const getBoleto = await BOLETO.METOD4(associado, KEY)
+
+
                             if(getBoleto   == 'None'){
 
                                 const sendMSG   = await sendMessage(getBoleto)
@@ -487,6 +447,8 @@ async function Users(cpf,KEY){
                                 
                                 const associado = await getSecondPart(users);
                                 const getBoleto = await BOLETO.METOD5(associado, KEY)
+
+
                                 if(getBoleto   == 'None'){
 
                                     const sendMSG   = await sendMessage(getBoleto)
@@ -504,9 +466,9 @@ async function Users(cpf,KEY){
                                 }
 
                             }catch(e){
-                                const msg = `Não encontramos o seu BOLETO neste CPF em nosso sistema\nPor favor, entre em contato conosco por telefone para resolvermos essa questão\nEstamos à disposição para ajudar!\nhttps://somatto.org.br/`
+                                const msg = `Não encontramos o seu *boleto* neste *cpf/cnpj* em nosso sistema\nPor favor, entre em contato conosco por telefone para resolvermos essa questão\nEstamos à disposição para ajudar!\nhttps://somatto.org.br/`
                                 LOGS.LOGS(msg);
-                                await sendMessage(msg)
+                                return msg
                             }
                        
                     }
@@ -516,22 +478,34 @@ async function Users(cpf,KEY){
 }}
 
 // SCANNER QRCODE
-
+process.env["NODE_TLS_REJECT_UNAUTHORIZED"] = 0;
 api.get('/qrcode', (req, res) => {
 
     fs.readFile('datalog/qr.json', 'utf8', (err, data) => {
     if (err) {
-        console.error('NOT HAVE ONE', err);
+        console.error('none', err);
         return;
     }
-        const jsonObject = JSON.parse(data);
-        res.json(jsonObject);
+
+        var jsonObject  = JSON.parse(data);
+        var Qr          = jsonObject[0]["qrcode"].toString();
+
+        if(Qr.includes('2@')){
+           res.json(jsonObject);
+        }else{
+           
+            fs.readFile('datalog/none.json', 'utf8', (err, data) => {   
+            var jsonObject  = JSON.parse(data);                 
+            res.json(jsonObject);
+           })
+        }
+        
+        
     });
     
 });
 
-// SCANNER QRCODE
-
+// BOLETOS REGRAS PYTHON
 
 api.post('/boletos', async (req, res)  => {
         
@@ -545,19 +519,19 @@ api.post('/boletos', async (req, res)  => {
 
             if(data.descricao == "VISTORIA"){        // APENAS ENVIADO QUANDO BOLETO PASSOU DA DATA
                     
-                const text   =`Olá! ${data.nome_associado}\n\nNós somos a Somatto Proteção Veicular\n\n -*Você precisa passar pela vistoria* \n\ndados do usuario: \n\ncpf: ${data.cpf_associado}\ntelefone: ${data.whatsapp}\n\n*Caso ja tenha pago,desconsidere essa mensagem*\n\nEstamos à disposição para ajudar!\n\nAcesse nosso site: [somatto.org.br](https://somatto.org.br/) `;
+                const text   =`Olá! ${data.nome_associado}\n\nNós somos a Somatto Proteção Veicular\n\n -*Você precisa passar pela vistoria* \n\ndados do usuario: \n\n*cpf/cnpj*: ${data.cpf_associado}\ntelefone: ${data.whatsapp}\n\n*Caso ja tenha pago,desconsidere essa mensagem*\n\nEstamos à disposição para ajudar!\n\nAcesse nosso site: [somatto.org.br](https://somatto.org.br/) `;
                 const chatId = number.substring(1) + "@c.us";
                 client.sendMessage(chatId, text);
 
             }else if(data.descricao == "BOLETO"){   // APENAS ENVIADO QUANDO BOLETO ESTA PENDENTE NA DATA
                 
-                const text   =`Olá! ${data.nome_associado}\nInformamos os dados do seu boleto para pagamento:\n\n-*linha digitável*: ${data.linha_digitavel}\n-*link de pagamento*: ${data.link_boleto}\n-*valor*: ${data.valor_boleto}\n-*vencimento*: ${data.vencimento}\n-*cpf*: ${data.cpf_associado}\n\nLembre-se: boletos em aberto após o vencimento deixarão o veículo descoberto.\n\n*Caso ja tenha pago,desconsidere essa mensagem*\n\nEstamos à disposição para ajudar!\n\nAcesse nosso site: [somatto.org.br](https://somatto.org.br/) `;
+                const text   =`Olá! ${data.nome_associado}\nInformamos os dados do seu boleto para pagamento:\n\n-*linha digitável*: ${data.linha_digitavel}\n-*link de pagamento*: ${data.link_boleto}\n-*valor*: ${data.valor_boleto}\n-*vencimento*: ${data.vencimento}\n-**cpf/cnpj**: ${data.cpf_associado}\n\nLembre-se: boletos em aberto após o vencimento deixarão o veículo descoberto.\n\n*Caso ja tenha pago,desconsidere essa mensagem*\n\nEstamos à disposição para ajudar!\n\nAcesse nosso site: [somatto.org.br](https://somatto.org.br/) `;
                 const chatId = number.substring(1) + "@c.us";
                 client.sendMessage(chatId, text);
 
             }else if(data.descricao == "ERROR"){  // APENAS ENVIADO QUANDO CLIENTE QUESTIONA O BOLETO POR MENSAGEM NO WHATSAPP FLAG: MARKETING
 
-                const text   =`Olá! Tudo bem? Nós somos a Somatto Proteção Veicular\n\nNão encontramos o seu BOLETO neste CPF em nosso sistema\nPor favor, entre em contato conosco por telefone para resolvermos essa questão\nEstamos à disposição para ajudar!\n\nAcesse nosso site: [somatto.org.br](https://somatto.org.br/) `
+                const text   =`Olá! Tudo bem? Nós somos a Somatto Proteção Veicular\n\nNão encontramos o seu BOLETO neste *cpf/cnpj* em nosso sistema\nPor favor, entre em contato conosco por telefone para resolvermos essa questão\nEstamos à disposição para ajudar!\n\nAcesse nosso site: [somatto.org.br](https://somatto.org.br/) `
                 const chatId = number.substring(1) + "@c.us";
                 client.sendMessage(chatId, text);
 
@@ -577,6 +551,6 @@ api.post('/boletos', async (req, res)  => {
 // ROTATIVIDADE DO MICROSERVIÇO PYTHON PORTANDO NESSE ENPOINT A CADA 24 HORAS    
 
 client.initialize();
-api.listen(8000, function() {console.log('SERVIDOR ATISE ASSIST INICIALIZANDO NA PORTA :: 8000.');});
+api.listen(80,function() {console.log('SERVIDOR ATISE ASSIST INICIALIZANDO NA PORTA :: 8000.');});
 
 

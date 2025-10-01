@@ -1,0 +1,26 @@
+2025/10/01-10:39:37.798 df1 Reusing MANIFEST /home/gleison/Documentos/NODE/ATISE/FINANCEIRO/.wwebjs_auth/session/Default/IndexedDB/https_web.whatsapp.com_0.indexeddb.leveldb/MANIFEST-000001
+2025/10/01-10:39:37.798 df1 Recovering log #62
+2025/10/01-10:39:37.798 df1 Reusing old log /home/gleison/Documentos/NODE/ATISE/FINANCEIRO/.wwebjs_auth/session/Default/IndexedDB/https_web.whatsapp.com_0.indexeddb.leveldb/000062.log 
+2025/10/01-10:39:37.799 df1 Delete type=2 #57
+2025/10/01-10:39:37.799 df1 Delete type=0 #59
+2025/10/01-10:39:37.799 df1 Delete type=2 #60
+2025/10/01-10:39:37.806 df6 Level-0 table #66: started
+2025/10/01-10:39:37.806 df6 Level-0 table #66: 0 bytes OK
+2025/10/01-10:39:37.813 df6 Delete type=0 #62
+2025/10/01-10:39:37.813 df6 Manual compaction at level-0 from '\x00\x1e\x00\x00\x00' @ 72057594037927935 : 1 .. '\x00\x1f\x00\x00\x00' @ 0 : 0; will stop at (end)
+2025/10/01-10:39:38.680 df1 Compacting 1@1 + 1@2 files
+2025/10/01-10:39:38.742 df1 Generated table #67@1: 37087 keys, 1734328 bytes
+2025/10/01-10:39:38.743 df1 Compacted 1@1 + 1@2 files => 1734328 bytes
+2025/10/01-10:39:38.749 df1 compacted to: files[ 0 0 1 0 0 0 0 ]
+2025/10/01-10:39:38.749 df1 Delete type=2 #61
+2025/10/01-10:39:38.749 df1 Delete type=2 #63
+2025/10/01-10:39:39.427 df0 Level-0 table #69: started
+2025/10/01-10:39:39.433 df0 Level-0 table #69: 18113 bytes OK
+2025/10/01-10:39:39.439 df0 Delete type=0 #65
+2025/10/01-10:39:39.439 df0 Manual compaction at level-0 from '\x00\x1f\x00\x00\x00' @ 72057594037927935 : 1 .. '\x00 \x00\x00\x00' @ 0 : 0; will stop at (end)
+2025/10/01-10:39:41.814 df8 Compacting 1@1 + 1@2 files
+2025/10/01-10:39:41.895 df8 Generated table #70@1: 37183 keys, 1738246 bytes
+2025/10/01-10:39:41.895 df8 Compacted 1@1 + 1@2 files => 1738246 bytes
+2025/10/01-10:39:41.902 df8 compacted to: files[ 0 0 1 0 0 0 0 ]
+2025/10/01-10:39:41.903 df8 Delete type=2 #67
+2025/10/01-10:39:41.903 df8 Delete type=2 #69
